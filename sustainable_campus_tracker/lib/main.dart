@@ -29,7 +29,7 @@ class SustainableCampusApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF168257)),
           useMaterial3: true,
           scaffoldBackgroundColor: const Color(0xFFF3F8F1),
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             elevation: 0,
             color: Colors.white,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),

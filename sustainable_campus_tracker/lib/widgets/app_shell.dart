@@ -29,7 +29,13 @@ class AppShell extends StatelessWidget {
                 ),
             ],
           ),
-          IconButton(onPressed: controller.logout, icon: const Icon(Icons.logout)),
+          IconButton(
+            onPressed: () {
+              controller.logout();
+              Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+            },
+            icon: const Icon(Icons.logout),
+          ),
         ],
       ),
       body: SafeArea(child: child),

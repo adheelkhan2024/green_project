@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../controllers/app_controller.dart';
+import '../models/team_member.dart';
 import '../utils/validators.dart';
 
 class TeamManagementScreen extends StatefulWidget {
@@ -18,8 +19,20 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
   final contribution = TextEditingController();
 
   @override
+  void dispose() {
+    name.dispose();
+    role.dispose();
+    contribution.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final projectId = ModalRoute.of(context)?.settings.arguments as String;
+    final routeArgument = ModalRoute.of(context)?.settings.arguments;
+    if (routeArgument is! String) {
+      return const Scaffold(body: Center(child: Text('Project not found')));
+    }
+    final projectId = routeArgument;
     final controller = context.watch<AppController>();
     return Scaffold(
       appBar: AppBar(title: const Text('Team Management')),
@@ -48,10 +61,10 @@ class _TeamManagementScreenState extends State<TeamManagementScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          FutureBuilder(
+          FutureBuilder<List<TeamMember>>(
             future: controller.getTeam(projectId),
             builder: (context, snapshot) {
-              final team = snapshot.data ?? [];
+              final team = snapshot.data ?? <TeamMember>[];
               if (team.isEmpty) return const Text('No team members assigned yet.');
               return Column(
                 children: [

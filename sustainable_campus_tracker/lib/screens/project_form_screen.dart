@@ -27,6 +27,16 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
   SustainabilityProject? editing;
 
   @override
+  void dispose() {
+    title.dispose();
+    description.dispose();
+    location.dispose();
+    budget.dispose();
+    co2.dispose();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final arg = ModalRoute.of(context)?.settings.arguments;
@@ -60,16 +70,16 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
             const SizedBox(height: 12),
             TextFormField(controller: location, decoration: const InputDecoration(labelText: 'Campus location'), validator: (value) => Validators.requiredText(value, 'Location')),
             const SizedBox(height: 12),
-            DropdownButtonFormField(value: category, decoration: const InputDecoration(labelText: 'Category'), items: ['Energy', 'Waste', 'Water', 'Transport', 'Biodiversity'].map((value) => DropdownMenuItem(value: value, child: Text(value))).toList(), onChanged: (value) => setState(() => category = value ?? category)),
+            DropdownButtonFormField<String>(value: category, decoration: const InputDecoration(labelText: 'Category'), items: ['Energy', 'Waste', 'Water', 'Transport', 'Biodiversity'].map((value) => DropdownMenuItem(value: value, child: Text(value))).toList(), onChanged: (value) => setState(() => category = value ?? category)),
             const SizedBox(height: 12),
-            DropdownButtonFormField(value: status, decoration: const InputDecoration(labelText: 'Status'), items: ['Planning', 'In Progress', 'Blocked', 'Completed'].map((value) => DropdownMenuItem(value: value, child: Text(value))).toList(), onChanged: (value) => setState(() => status = value ?? status)),
+            DropdownButtonFormField<String>(value: status, decoration: const InputDecoration(labelText: 'Status'), items: ['Planning', 'In Progress', 'Blocked', 'Completed'].map((value) => DropdownMenuItem(value: value, child: Text(value))).toList(), onChanged: (value) => setState(() => status = value ?? status)),
             const SizedBox(height: 12),
             Text('Progress: ${progress.round()}%'),
             Slider(value: progress, min: 0, max: 100, divisions: 20, label: '${progress.round()}%', onChanged: (value) => setState(() => progress = value)),
             const SizedBox(height: 12),
-            TextFormField(controller: budget, decoration: const InputDecoration(labelText: 'Budget in R'), keyboardType: TextInputType.number),
+            TextFormField(controller: budget, decoration: const InputDecoration(labelText: 'Budget in R'), keyboardType: TextInputType.number, validator: (value) => _numberValidator(value, 'Budget')),
             const SizedBox(height: 12),
-            TextFormField(controller: co2, decoration: const InputDecoration(labelText: 'Estimated CO2 reduction in tons'), keyboardType: TextInputType.number),
+            TextFormField(controller: co2, decoration: const InputDecoration(labelText: 'Estimated CO2 reduction in tons'), keyboardType: TextInputType.number, validator: (value) => _numberValidator(value, 'CO2 reduction')),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -106,6 +116,10 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
 
   Future<void> save() async {
     if (!formKey.currentState!.validate()) return;
+    if (dueDate.isBefore(startDate)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Due date must be after the start date')));
+      return;
+    }
     await context.read<AppController>().saveProject(
           id: editing?.id,
           title: title.text,
@@ -120,5 +134,12 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
           estimatedCo2Reduction: double.tryParse(co2.text) ?? 0,
         );
     if (mounted) Navigator.pop(context);
+  }
+
+  String? _numberValidator(String? value, String label) {
+    final parsed = double.tryParse(value ?? '');
+    if (parsed == null) return '$label must be a number';
+    if (parsed < 0) return '$label cannot be negative';
+    return null;
   }
 }
