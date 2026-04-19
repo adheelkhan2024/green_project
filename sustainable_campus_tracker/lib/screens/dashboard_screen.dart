@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,20 +42,22 @@ class DashboardScreen extends StatelessWidget {
                   children: [
                     Text('Progress overview', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
                     const SizedBox(height: 16),
-                    SizedBox(
-                      height: 180,
-                      child: BarChart(
-                        BarChartData(
-                          borderData: FlBorderData(show: false),
-                          gridData: const FlGridData(show: false),
-                          titlesData: const FlTitlesData(leftTitles: AxisTitles(), rightTitles: AxisTitles(), topTitles: AxisTitles(), bottomTitles: AxisTitles()),
-                          barGroups: [
-                            for (int i = 0; i < projects.length; i++)
-                              BarChartGroupData(x: i, barRods: [BarChartRodData(toY: projects[i].progress.toDouble(), color: const Color(0xFF168257), width: 18, borderRadius: BorderRadius.circular(6))]),
+                    if (projects.isEmpty)
+                      const Text('No progress data yet.')
+                    else
+                      for (final project in projects.take(5)) ...[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: Text(project.title, overflow: TextOverflow.ellipsis)),
+                            const SizedBox(width: 12),
+                            Text('${project.progress}%'),
                           ],
                         ),
-                      ),
-                    ),
+                        const SizedBox(height: 8),
+                        LinearProgressIndicator(value: project.progress / 100, minHeight: 10),
+                        const SizedBox(height: 14),
+                      ],
                   ],
                 ),
               ),

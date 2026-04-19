@@ -33,7 +33,7 @@ class ProjectCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(project.description, maxLines: 2, overflow: TextOverflow.ellipsis),
               const SizedBox(height: 16),
-              LinearProgressIndicator(value: project.progress / 100, minHeight: 10, borderRadius: BorderRadius.circular(12)),
+              LinearProgressIndicator(value: project.progress / 100, minHeight: 10),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

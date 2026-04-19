@@ -124,7 +124,7 @@ class _ProjectSummary extends StatelessWidget {
             const SizedBox(height: 10),
             Text(project.description),
             const SizedBox(height: 16),
-            LinearProgressIndicator(value: project.progress / 100, minHeight: 12, borderRadius: BorderRadius.circular(12)),
+            LinearProgressIndicator(value: project.progress / 100, minHeight: 12),
             const SizedBox(height: 10),
             Text('${project.progress}% complete • ${project.status}'),
             const Divider(height: 28),

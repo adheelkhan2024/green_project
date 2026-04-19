@@ -15,13 +15,7 @@ class AiService {
     final deadlinePenalty = due.difference(now).inDays < 14 && project.progress < 75 ? 18 : 0;
     final delayRisk = (progressGap + teamPenalty + deadlinePenalty).clamp(0, 100).toInt();
     final successScore = (100 - delayRisk + (team.length * 3) + (project.progress ~/ 8)).clamp(0, 100).toInt();
-    final categoryMultiplier = switch (project.category) {
-      'Energy' => 1.35,
-      'Waste' => 1.15,
-      'Water' => 1.25,
-      'Transport' => 1.3,
-      _ => 1.0,
-    };
+    final categoryMultiplier = _categoryMultiplier(project.category);
     final impact = project.estimatedCo2Reduction * categoryMultiplier * (project.progress / 100);
     final recommendation = _recommendation(delayRisk, project.progress, team.length);
     final summary = 'Expected progress is $expectedProgress%, actual progress is ${project.progress}%. '
@@ -42,5 +36,13 @@ class AiService {
     if (teamSize < 3) return 'Team capacity is low. Assign at least one coordinator and one implementation member.';
     if (progress < 35) return 'Progress is early. Confirm materials, ownership, and blockers before the next review.';
     return 'Project is healthy. Continue monitoring progress and document evidence for the sustainability report.';
+  }
+
+  double _categoryMultiplier(String category) {
+    if (category == 'Energy') return 1.35;
+    if (category == 'Waste') return 1.15;
+    if (category == 'Water') return 1.25;
+    if (category == 'Transport') return 1.3;
+    return 1.0;
   }
 }

@@ -97,7 +97,7 @@ class _Score extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 6),
-        LinearProgressIndicator(value: value / 100, minHeight: 10, color: color, borderRadius: BorderRadius.circular(12)),
+        LinearProgressIndicator(value: value / 100, minHeight: 10, color: color),
       ],
     );
   }
