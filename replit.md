@@ -25,3 +25,9 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## Flutter Mobile App
+
+- `sustainable_campus_tracker/` contains a standalone Flutter project for the Sustainable Campus Projects Tracker academic mobile app.
+- The Flutter app uses local SQLite persistence, salted SHA-256 password hashing, role-based Admin and Student/User flows, project CRUD, team collaboration, document metadata uploads, in-app notifications, charts, and rule-based AI progress/impact insights.
+- Run it from Android Studio or VS Code with `flutter pub get` and `flutter run`.

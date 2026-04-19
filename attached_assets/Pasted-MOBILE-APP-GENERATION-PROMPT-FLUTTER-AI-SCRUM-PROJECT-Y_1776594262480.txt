@@ -1,0 +1,111 @@
+MOBILE APP GENERATION PROMPT (FLUTTER + AI + SCRUM PROJECT)
+
+You are an expert Flutter mobile application developer and software architect.
+Your task is to design and implement a full cross-platform mobile application (Android + iOS) using Flutter (Dart) for the following academic project:
+
+📌 PROJECT TITLE
+
+Sustainable Campus Projects Tracker
+
+📌 PROBLEM STATEMENT
+
+Campus sustainability projects are poorly tracked and managed. There is no centralized system for monitoring green initiatives, tracking progress, or coordinating teams effectively.
+
+📌 PROJECT OBJECTIVE
+
+Design and develop a mobile application using Flutter only that:
+
+Centralizes sustainability project tracking
+Supports collaboration between students and teams
+Provides real-time progress monitoring
+Uses AI features for insights and prediction
+Is mobile-first, responsive, and user-friendly
+📌 CORE FEATURES (MUST IMPLEMENT)
+
+Your Flutter application MUST include:
+
+1. Project Management
+Create, update, delete sustainability projects
+Project details page (description, team, status)
+2. Progress Tracking
+Progress percentage per project
+Visual progress indicators (progress bars / charts)
+3. Team Collaboration
+Assign members to projects
+View team roles and contributions
+4. Document Uploads
+Upload supporting files (PDF/images)
+5. Notifications
+In-app notifications for updates and deadlines
+📌 AI INTEGRATION (MANDATORY)
+
+Integrate AI-driven features such as:
+
+📊 AI-based project progress analysis (predict delays or completion success)
+🌱 AI sustainability impact estimation (basic predictive logic or ML placeholder)
+💬 Optional AI assistant/chatbot for project queries
+📌 TECH STACK (STRICT REQUIREMENTS)
+Frontend (MUST USE ONLY)
+Flutter
+Dart
+Material Design UI (Flutter Widgets)
+Backend (choose one)
+Firebase (preferred)
+OR
+Node.js + Express API
+Database
+Firebase Firestore OR
+SQLite (local storage allowed for offline mode)
+Authentication
+Firebase Authentication OR JWT-based login system
+Role-based access:
+Admin
+Student/User
+📌 SOFTWARE ENGINEERING REQUIREMENTS
+Methodology
+
+Follow Scrum Agile Development:
+
+Product backlog
+Sprint planning
+Iterative development (Sprint 1, 2, 3…)
+Sprint reviews
+Retrospectives
+Architecture Requirements
+Clean modular Flutter structure
+Separation of concerns (UI, services, models, controllers)
+Reusable components
+📌 SECURITY REQUIREMENTS
+Password hashing or Firebase secure auth
+Input validation and sanitisation
+Encrypted or secure storage for sensitive data
+POPIA-compliant data handling principles
+📌 API / INTEGRATIONS (OPTIONAL BUT ENCOURAGED)
+Firebase Cloud Messaging (notifications)
+Google Maps (if location tracking is added)
+REST APIs for backend communication
+📌 OUTPUT EXPECTATION
+
+Generate:
+
+Full Flutter project structure
+Complete working source code
+Screens for:
+Login/Register
+Dashboard
+Project List
+Project Details
+Create/Edit Project
+Team Management
+Notifications
+AI Insights Screen
+Firebase or backend integration setup
+Clear instructions to run the project in Android Studio or VS Code
+📌 IMPORTANT CONSTRAINTS
+MUST use Flutter only for frontend
+Must be mobile-first (Android priority)
+Code must be clean, modular, and production-structured
+Must include at least one AI-related feature implementation (not just placeholder UI)
+📌 FINAL GOAL
+
+Produce a fully functional, scalable, and well-structured Flutter mobile application that solves the Sustainable Campus Projects Tracker problem and meets academic evaluation standards.
